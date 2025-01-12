@@ -1,0 +1,19 @@
+<web-app>
+    <servlet>
+        <servlet-name>UserRegistration</servlet-name>
+        <servlet-class>com.ridegreen.controller.UserRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserRegistration</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserProfile</servlet-name>
+        <servlet-class>com.ridegreen.controller.UserProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserProfile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+</web-app>

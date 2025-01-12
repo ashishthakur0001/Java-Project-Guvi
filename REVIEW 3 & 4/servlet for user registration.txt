@@ -1,0 +1,35 @@
+package com.ridegreen.controller;
+
+import com.ridegreen.model.User;
+import com.ridegreen.model.UserDAO;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+public class UserRegistrationServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/registration.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        User user = new User(name, email, password);
+        UserDAO userDAO = new UserDAO();
+
+        if (userDAO.saveUser(user)) {
+            request.setAttribute("user", user);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/success.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            request.setAttribute("error", "Registration failed. Please try again.");
+            doGet(request, response);
+        }
+    }
+}
